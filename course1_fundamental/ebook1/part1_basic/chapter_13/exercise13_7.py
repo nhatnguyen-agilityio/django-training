@@ -1,12 +1,11 @@
 import string
 import random
 
-def read_words():
-    fin = open("gutenberg.txt")
+def read_words(filename="gutenberg.txt"):
+    fin = open(filename)
     list_words = []
     for line in fin:
-        words = line.strip()
-        words_in_line = words.split(" ")
+        words_in_line = line.strip().split(" ")
         for w in words_in_line:
             word = w.strip()
             new_word = ""
@@ -20,7 +19,8 @@ def find_index(list):
     number_of_list = len(list)
     return random.randint(0, number_of_list-1)
 
-list_words = read_words()
-print("Word: {0}".format(list_words[find_index(list_words)]))
-print("Word: {0}".format(list_words[find_index(list_words)]))
-print("Word: {0}".format(list_words[find_index(list_words)]))
+if __name__ == "__main__":
+    list_words = read_words()
+    print("Word: {0}".format(list_words[find_index(list_words)]))
+    print("Word: {0}".format(list_words[find_index(list_words)]))
+    print("Word: {0}".format(list_words[find_index(list_words)]))

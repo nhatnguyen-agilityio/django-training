@@ -1,7 +1,7 @@
 import string
 
-def read_words():
-    fin = open("gutenberg.txt")
+def read_words(filename="gutenberg.txt"):
+    fin = open(filename)
     count = 0
     list_words = {}
     for line in fin:
@@ -20,12 +20,9 @@ def read_words():
                 list_words[new_word] += 1
     return list_words
 
-list_words = read_words()
-w_list = ["abc", "nhat", "your", "okokok"]
-new_list = []
+if __name__ == "__main__":
+    list_words = read_words()
+    w_list = ["abc", "nhat", "your", "okokok"]
+    new_list = [k for k in list_words if k not in w_list]
 
-for k in list_words:
-    if k not in w_list:
-        new_list.append(k)
-
-print(new_list)
+    print(new_list)

@@ -3,16 +3,16 @@ import string
 def process_line(line, hist):
     line = line.replace('-', ' ')
     for word in line.split():
-        word = word.strip(string.punctuation + string.whitespace)
-        word = word.lower()
+        word = word.strip(string.punctuation + string.whitespace).lower()
         hist[word] = hist.get(word, 0) + 1
 
-def process_file(filename):
+def process_file(filename="emma.txt"):
     hist = dict()
     fp = open(filename)
     for line in fp:
         process_line(line, hist)
     return hist
 
-hist = process_file('emma.txt')
-print(hist)
+if __name__ == "__main__":
+    hist = process_file()
+    print(hist)

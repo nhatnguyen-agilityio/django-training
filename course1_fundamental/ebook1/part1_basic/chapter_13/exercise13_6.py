@@ -1,12 +1,11 @@
 import string
 
-def read_words():
-    fin = open("gutenberg.txt")
+def read_words(filename="gutenberg.txt"):
+    fin = open(filename)
     count = 0
     list_words = {}
     for line in fin:
-        words = line.strip()
-        words_in_line = words.split(" ")
+        words_in_line = line.strip().split(" ")
         for w in words_in_line:
             word = w.strip()
             new_word = ""
@@ -20,7 +19,7 @@ def read_words():
                 list_words[new_word] += 1
     return list_words
 
-list_words = read_words()
-w_list = ["abc", "nhat", "your", "okokok"]
-
-print(set(list_words) - set(w_list))
+if __name__ == "__main__":
+    list_words = read_words()
+    w_list = ["abc", "nhat", "your", "okokok"]
+    print(set(list_words) - set(w_list))

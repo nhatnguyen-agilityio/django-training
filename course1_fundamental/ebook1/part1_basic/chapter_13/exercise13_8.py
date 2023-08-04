@@ -38,14 +38,14 @@ def random_text(n=100):
         start = shift(start, word)
         
 
-def read_words():
-    fin = open("gutenberg.txt")
+def read_words(filename="gutenberg.txt"):
+    fin = open(filename)
     for line in fin:
         if line.startswith("*** START OF THIS") or line.startswith('*** END OF THIS'):
             continue
         for word in line.rstrip().split():
             process_word(word, 2)
     random_text(100)
-    print()
 
-read_words()
+if __name__ == "__main__":
+    read_words()
