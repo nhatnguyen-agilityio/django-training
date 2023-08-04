@@ -4,15 +4,17 @@ def avoid(word, forbidden_letters):
             return False
     return True
 
-def read_words():
-    fin = open("words.txt")
+def read_words(filename="words.txt"):
+    fin = open(filename)
     total = 0
-    forbidden_letter = input("Enter a sting of forbidden letters:")
-    for word in fin:
-        # print(word)
-        # print(avoid(word, forbidden_letter))
-        if avoid(word, forbidden_letter):
-            total += 1
-    print("Number of the words that don't contain any forbidden letters: {0}".format(total))
+    try:
+        forbidden_letter = input("Enter a string of forbidden letters:")
+        for word in fin:
+            if avoid(word, forbidden_letter):
+                total += 1
+        print("Number of the words that don't contain any forbidden letters: {0}".format(total))
+    except:
+        raise KeyError("Please enter a string of forbidden letters!!!")
 
-read_words()
+if __name__ == "__main__":
+    read_words()

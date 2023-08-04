@@ -12,6 +12,7 @@ def find_number(number):
                     return True
     return False
 
-for n in range(300000, 3000000):
-    if find_number(n):
-        print("Number: {0}".format(n))
+if __name__ == "__main__":
+    for n in range(300000, 3000000):
+        if find_number(n):
+            print("Number: {0}".format(n))

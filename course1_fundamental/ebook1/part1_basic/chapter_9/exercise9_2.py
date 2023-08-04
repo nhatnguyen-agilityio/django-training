@@ -3,8 +3,8 @@ def has_no_e(word):
         return True
     return False
 
-def read_words():
-    fin = open("words.txt")
+def read_words(filename='words.txt'):
+    fin = open(filename)
     total_words = 0
     total_words_no_e = 0
     for word in fin:
@@ -15,5 +15,6 @@ def read_words():
     
     percentage_no_e = (total_words_no_e*100)/total_words
     print(percentage_no_e)
-
-read_words()
+    
+if __name__ == '__main__':
+    read_words()

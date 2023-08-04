@@ -14,7 +14,7 @@ def num_instances(diff, flag=False):
         mother = daughter + diff
 
         if are_reversed(daughter, mother) or are_reversed(daughter, mother+1):
-            count = count + 1
+            count += 1
             if flag:
                 print(daughter, mother)
         if mother > 120:
@@ -22,4 +22,5 @@ def num_instances(diff, flag=False):
         daughter = daughter + 1
     return count
 
-num_instances(18, True)
+if __name__ == "__main__":
+    num_instances(18, True)

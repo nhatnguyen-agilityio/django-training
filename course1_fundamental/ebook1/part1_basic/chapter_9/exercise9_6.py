@@ -4,8 +4,8 @@ def is_abecedarian(word):
             return False
     return True
 
-def read_words():
-    fin = open("words.txt")
+def read_words(filename="words.txt"):
+    fin = open(filename)
     count = 0
     for line in fin:
         word = line.strip()
@@ -14,4 +14,6 @@ def read_words():
             count += 1
     return count
 
-print("Number of words are alphabetical order: {0}".format(read_words()))
+if __name__ == "__main__":
+    count = read_words()
+    print("Number of words are alphabetical order: {0}".format(count))
