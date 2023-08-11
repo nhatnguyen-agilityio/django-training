@@ -1,0 +1,3 @@
+import writing_modules
+
+writing_modules.linecount
