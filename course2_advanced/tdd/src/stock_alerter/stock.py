@@ -1,16 +1,48 @@
+import bisect
+from datetime import timedelta
+from enum import Enum
+
+from .timeseries import TimeSeries, MovingAverage
+
+class StockSignal(Enum):
+    buy = 1
+    neutral = 0
+    sell = -1
+
 class Stock:
+    LONG_TERM_TIMESPAN = 10
+    SHORT_TERM_TIMESPAN = 5
     def __init__(self, symbol):
         self.symbol = symbol
-        self.price_history = []
+        self.history = TimeSeries()
+
+    @property
+    def price(self):
+        try:
+            return self.history[-1].value
+        except IndexError:
+            return None
 
     def update(self, timestamp, price):
         if price < 0:
             raise ValueError("price should not be negative")
-        self.price_history.append(price)
+        self.history.update(timestamp, price)
 
     def is_increasing_trend(self):
-        return self.price_history[-3] < self.price_history[-2] < self.price_history[-1]
+        return self.history[-3].value < self.history[-2].value < self.history[-1].value
 
-    @property
-    def price(self):
-        return self.price_history[-1] if self.price_history else None
+    def _is_crossover_below_to_above(self, on_date, ma, reference_ma):
+        prev_date = on_date - timedelta(1)
+        return (ma.value_on(prev_date) < reference_ma.value_on(prev_date) and ma.value_on(on_date) > reference_ma.value_on(on_date))
+
+    def get_crossover_signal(self, on_date):
+        long_term_ma = MovingAverage(self.history, self.LONG_TERM_TIMESPAN)
+        short_term_ma = MovingAverage(self.history, self.SHORT_TERM_TIMESPAN)
+
+        if self._is_crossover_below_to_above(on_date, short_term_ma, long_term_ma):
+            return StockSignal.buy
+        
+        if self._is_crossover_below_to_above(on_date, long_term_ma, short_term_ma):
+            return StockSignal.sell
+        
+        return StockSignal.neutral

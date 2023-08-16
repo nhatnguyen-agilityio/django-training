@@ -50,6 +50,10 @@ class StockTrendTest(unittest.TestCase):
         self.given_a_series_of_prices([8, 10, 10])
         self.assertFalse(self.goog.is_increasing_trend())
 
+    # def test_timestamp_is_increasing(self):
+    #     self.given_a_series_of_prices([8, 10, 12])
+    #     self.assertTrue(self.goog.is_increasing_timestamp())
+
 class PriceRuleTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
