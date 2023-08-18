@@ -6,6 +6,7 @@ from ..rule import PriceRule
 from ..stock import Stock
 from ..event import Event
 
+
 class TestAction:
     excuted = False
 

@@ -3,6 +3,7 @@ from datetime import timedelta
 from enum import Enum
 
 from .timeseries import TimeSeries, MovingAverage
+from .event import Event
 
 class StockSignal(Enum):
     buy = 1
@@ -15,6 +16,7 @@ class Stock:
     def __init__(self, symbol):
         self.symbol = symbol
         self.history = TimeSeries()
+        self.updated = Event()
 
     @property
     def price(self):
