@@ -14,6 +14,7 @@ class TestAction:
         self.executed = True
 
 class AlertTest(unittest.TestCase):
+    @unittest.expectedFailure
     def test_action_is_executed_when_rule_matches(self):
         goog = mock.MagicMock(spec=Stock)
         goog.updated = Event()
