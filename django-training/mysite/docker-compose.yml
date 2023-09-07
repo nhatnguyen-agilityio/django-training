@@ -1,12 +1,10 @@
 services:
   db:
-    image: postgres
+    image: nouchka/sqlite3:latest
     volumes:
-      - ./data/db:/var/lib/postgresql/data
+      - ./data/db:/root/db
     environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - SQLITE3_DB=db.sqlite3
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -14,9 +12,5 @@ services:
       - .:/code
     ports:
       - "8000:8000"
-    environment:
-      - POSTGRES_NAME=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
     depends_on:
       - db
