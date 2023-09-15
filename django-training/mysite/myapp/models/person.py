@@ -11,7 +11,7 @@ class Person(models.Model):
         max_length=30, blank=True, null=True, verbose_name="The first name"
     )
     last_name = models.CharField(max_length=30, verbose_name="The last name")
-    birth_date = models.DateField()
+    birth_date = models.DateField(null=True, blank=True)
     shirt_size = models.CharField(max_length=1, choices=SHIRT_SIZES)
 
     def __str__(self):
