@@ -1,6 +1,25 @@
 from django.db import models
 
 
+class PersonQuerySet(models.QuerySet):
+    def authors(self):
+        return self.filter(role="A")
+
+    def editors(self):
+        return self.filter(role="B")
+
+
+class PersonManager(models.Manager):
+    def get_queryset(self):
+        return PersonQuerySet(self.model, using=self._db)
+
+    def authors(self):
+        return self.get_queryset().authors()
+
+    def editors(self):
+        return self.get_queryset().editors()
+
+
 class Person(models.Model):
     SHIRT_SIZES = [
         ("S", "Small"),
@@ -13,6 +32,10 @@ class Person(models.Model):
     last_name = models.CharField(max_length=30, verbose_name="The last name")
     birth_date = models.DateField(null=True, blank=True)
     shirt_size = models.CharField(max_length=1, choices=SHIRT_SIZES)
+    role = models.CharField(
+        max_length=1, choices=[("A", "Author"), ("B", "Editor")], default="A"
+    )
+    people = PersonManager()
 
     def __str__(self):
         return self.first_name + self.last_name

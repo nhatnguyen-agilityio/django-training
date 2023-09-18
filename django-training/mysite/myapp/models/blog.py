@@ -13,6 +13,8 @@ class Blog(models.Model):
     def get_absolute_url(self):
         return "/blog/%i/" % self.id
 
+    blog_objects = models.Manager()
+
 
 class Author(models.Model):
     name = models.CharField(max_length=200)
