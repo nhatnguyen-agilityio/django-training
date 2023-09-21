@@ -31,7 +31,7 @@ class Book(models.Model):
     publisher = models.ForeignKey(
         Publisher, on_delete=models.CASCADE, null=True, blank=True
     )
-    pubdate = models.DateField(default=datetime.now())
+    pubdate = models.DateField()
     objects = models.Manager()
     dahl_objects = DahlBookManager()
 
