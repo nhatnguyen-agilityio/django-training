@@ -1,6 +1,19 @@
 from django.db import models
 
 
+class ProductQuerySet(models.QuerySet):
+    def product_with_A_category(self):
+        return self.filter(category__name__exact="A")
+
+
+class ProductAManager(models.Manager):
+    def get_queryset(self):
+        return ProductQuerySet(self.model, using=self._db)
+
+    def product_with_category_A(self):
+        return self.get_queryset().product_with_A_category()
+
+
 class ProductManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(quantity__gt=0)
@@ -23,6 +36,7 @@ class Product(models.Model):
 
     objects = models.Manager()
     product_stock = ProductManager()
+    product_A = ProductAManager()
 
     def __str__(self):
         return self.name
