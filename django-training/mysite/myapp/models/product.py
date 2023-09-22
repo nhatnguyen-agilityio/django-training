@@ -28,7 +28,9 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(
+        Category, on_delete=models.CASCADE, db_column="product_category"
+    )
     price = models.PositiveBigIntegerField()
     discount_price = models.PositiveBigIntegerField(null=True, blank=True)
     quantity = models.IntegerField(default=0)
