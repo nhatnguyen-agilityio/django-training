@@ -1,0 +1,9 @@
+<form action="product-form" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+
+<a href="list-product">
+    <button>List Product</button>
+</a>

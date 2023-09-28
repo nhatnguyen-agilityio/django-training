@@ -1,9 +1,9 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
-from .forms import ContactForm, BlogForm
+from .forms import ContactForm, BlogForm, ProductForm
 
-from .models import Blog
+from .models import Blog, Product
 
 
 # Create your views here.
@@ -42,3 +42,35 @@ def get_blog(request):
     else:
         form = BlogForm()
     return render(request, "blog-form.html", {"form": form})
+
+
+def get_product(request):
+    if request.method == "POST":
+        form = ProductForm(request.POST)
+
+        if form.is_valid():
+            name = form.cleaned_data["name"]
+            category = form.cleaned_data["category"]
+            price = form.cleaned_data["price"]
+            discount_price = form.cleaned_data["discount_price"]
+            quantity = form.cleaned_data["quantity"]
+            description = form.cleaned_data["description"]
+            new_product = Product(
+                name=name,
+                category=category,
+                price=price,
+                discount_price=discount_price,
+                quantity=quantity,
+                description=description,
+            )
+            print("come here")
+            new_product.save()
+            return HttpResponseRedirect("list-product")
+    else:
+        form = ProductForm()
+    return render(request, "product-form.html", {"form": form})
+
+
+def get_list_product(request):
+    list_product = Product.objects.all()
+    return render(request, "list-product.html", {"data": list_product})
