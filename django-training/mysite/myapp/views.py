@@ -1,8 +1,9 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-import logging
 
-from .forms import ContactForm
+from .forms import ContactForm, BlogForm
+
+from .models import Blog
 
 
 # Create your views here.
@@ -26,3 +27,18 @@ def get_contact(request):
 
 def move_to_thanks_page(request):
     return render(request, "thanks.html")
+
+
+def get_blog(request):
+    if request.method == "POST":
+        form = BlogForm(request.POST)
+
+        if form.is_valid():
+            form_name = form.cleaned_data["name"]
+            form_tag_line = form.cleaned_data["tagline"]
+            new_blog = Blog(name=form_name, tagline=form_tag_line)
+            new_blog.save()
+            return HttpResponseRedirect("thanks/")
+    else:
+        form = BlogForm()
+    return render(request, "blog-form.html", {"form": form})
