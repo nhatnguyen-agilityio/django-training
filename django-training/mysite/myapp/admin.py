@@ -1,5 +1,9 @@
 from django.contrib import admin
-from .models import Product
+from .models import Product, Category
+
+
+class ProductInline(admin.TabularInline):
+    model = Product
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -29,4 +33,9 @@ class ProductAdmin(admin.ModelAdmin):
     # autocomplete_fields = ["category"]
 
 
+class CategoryAdmin(admin.ModelAdmin):
+    inlines = [ProductInline,]
+
+
 admin.site.register(Product, ProductAdmin)
+admin.site.register(Category, CategoryAdmin)
