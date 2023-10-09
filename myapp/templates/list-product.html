@@ -1,0 +1,26 @@
+<h1>List Products</h1>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Discount Price</th>
+        <th>Quantity</th>
+        <th>Description</th>
+    </tr>
+    {% for item in data %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.discount_price }}</td>
+            <td>{{ item.quantity }}</td>
+            {% if item.description %}
+            <td>{{ item.description }}</td>
+            {% else %}
+            <td></td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+</table>
