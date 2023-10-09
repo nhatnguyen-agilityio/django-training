@@ -1,1 +1,4 @@
 Django>=3.0
+gunicorn
+pysqlite3
+pysqlite3-binary
