@@ -10,7 +10,7 @@ class ProductInline(admin.TabularInline):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    fields = ["name", "category", "price", "discount_price", "quantity", "description"]
+    # fields = ["name", "category", "price", "discount_price", "quantity", "description"]
     empty_value_display = "No value"
     fieldsets = [
         (
