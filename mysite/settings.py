@@ -79,12 +79,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'URL': 'postgresql://postgres:08i7qxCXwm9eP4tsqLHj@containers-us-west-186.railway.app:6007/railway',
+        'URL': 'postgresql://postgres:3VvY1G2fJWWKClRAR7UO@containers-us-west-61.railway.app:6966/railway',
         'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD': '08i7qxCXwm9eP4tsqLHj',
-        'HOST': 'containers-us-west-186.railway.app',
-        'PORT': 6007,
+        'PASSWORD': '3VvY1G2fJWWKClRAR7UO',
+        'HOST': 'containers-us-west-61.railway.app',
+        'PORT': 6966,
     }
 }
 
